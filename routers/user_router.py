@@ -26,14 +26,9 @@ async def find_all_users():
     return await UserInDB.fetch_all(query)
 
 
-@router.post("/user/")
-async def create_user(user: dict, db: Session = Depends(get_db)):
-    '''user_in_db = db.query(UserInDB).get(user.id_user)
-    if user_in_db != None:
-        raise HTTPException(status_code=404,
-        detail="El usuario ya existe")
-    else:  ''' 
-    user_in_db = UserInDB(nombre="nombre", apellido="apellido", correo="correo", password="password") 
+@router.post("/user/", response_model=UserIn)
+async def create_user(user: UserIn, db: Session = Depends(get_db)): 
+    user_in_db = UserInDB(nombre=user.nombre, apellido=user.apellido, correo=user.correo, password=user.password) 
     db.add(user_in_db)
     db.commit()
     db.refresh(user_in_db)

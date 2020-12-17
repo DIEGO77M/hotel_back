@@ -7,6 +7,8 @@ class UserIn(BaseModel):
     correo: str
     password: str
     
+    class Config:
+        orm_mode = True
     
 class UserOut(BaseModel):
     id_user: int

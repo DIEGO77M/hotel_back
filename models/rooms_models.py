@@ -10,8 +10,7 @@ class RoomOut(BaseModel):
     piso: int
     descripcion: str
     caracteristicas: str
-    precio_diario: int
-    tipo: str
+    
     
     class Config:
         orm_mode = True
